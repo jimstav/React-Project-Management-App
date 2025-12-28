@@ -15,11 +15,11 @@ function App() {
 
   return (
     <>
-      <div className="grid grid-flow-col auto-cols-max h-screen">
+      <div className="grid grid-flow-col auto-cols-max w-full h-screen">
         <aside className="p-4 bg-black text-white rounded-tr-xl w-60 mt-6">
           <Projects projects={projectList} />
         </aside>
-        <main className="p-4">
+        <main className="p-4 w-full">
           {selectedProject ? (
             <ProjectDetails project={selectedProject} />
           ) : (
