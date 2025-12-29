@@ -7,7 +7,7 @@ import NewProject from './NewProject';
 export type Project = {
   title: string;
   description: string;
-  dueDate: Date;
+  dueDate: string;
 };
 
 function App() {
@@ -19,6 +19,12 @@ function App() {
     setNewProject(add);
   };
 
+  const addNewProject = (project: Project) => {
+    setProjectList((prevProjectList) => {
+      return [...prevProjectList, project];
+    });
+  };
+
   return (
     <>
       <div className="grid grid-flow-col auto-cols-max w-full h-screen">
@@ -26,7 +32,7 @@ function App() {
           <Projects projects={projectList} onAddProject={handleNewProject} />
         </aside>
         <main className="p-4 w-full">
-          {newProject && <NewProject />}
+          {newProject && <NewProject onSaveProject={addNewProject} />}
           {selectedProject && !newProject && (
             <ProjectDetails project={selectedProject} />
           )}
