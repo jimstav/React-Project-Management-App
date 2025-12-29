@@ -25,6 +25,11 @@ function App() {
     });
   };
 
+  const handleCancel = () => {
+    setNewProject(false);
+    setSelectedProject(null);
+  };
+
   return (
     <>
       <div className="grid grid-flow-col auto-cols-max w-full h-screen">
@@ -32,7 +37,9 @@ function App() {
           <Projects projects={projectList} onAddProject={handleNewProject} />
         </aside>
         <main className="p-4 w-full">
-          {newProject && <NewProject onSaveProject={addNewProject} />}
+          {newProject && (
+            <NewProject onSaveProject={addNewProject} onCancel={handleCancel} />
+          )}
           {selectedProject && !newProject && (
             <ProjectDetails project={selectedProject} />
           )}

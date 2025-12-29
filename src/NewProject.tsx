@@ -3,9 +3,10 @@ import type { Project } from './App';
 
 interface NewProjectProps {
   onSaveProject: (project: Project) => void;
+  onCancel: () => void;
 }
 
-const NewProject = ({ onSaveProject }: NewProjectProps) => {
+const NewProject = ({ onSaveProject, onCancel }: NewProjectProps) => {
   const title = useRef<HTMLInputElement | null>(null);
   const description = useRef<HTMLTextAreaElement | null>(null);
   const dueDate = useRef<HTMLInputElement | null>(null);
@@ -28,10 +29,15 @@ const NewProject = ({ onSaveProject }: NewProjectProps) => {
     };
 
     onSaveProject(project);
-    handleCancel();
+    clearForm();
   };
 
   const handleCancel = () => {
+    clearForm();
+    onCancel();
+  };
+
+  const clearForm = () => {
     if (title.current) {
       title.current.value = '';
     }
