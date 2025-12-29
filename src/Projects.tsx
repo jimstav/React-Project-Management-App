@@ -2,9 +2,10 @@ import type { Project } from './App';
 
 interface ProjectsProps {
   projects: Project[];
+  onAddProject: (add: boolean) => void;
 }
 
-const Projects = ({ projects }: ProjectsProps) => {
+const Projects = ({ projects, onAddProject }: ProjectsProps) => {
   return (
     <>
       <div className="uppercase font-bold">Your Projects</div>
@@ -14,7 +15,10 @@ const Projects = ({ projects }: ProjectsProps) => {
         ))}
       </div>
       <div className="p-2">
-        <button className="rounded bg-neutral-700 p-3 hover:bg-neutral-800 text-neutral-400">
+        <button
+          className="rounded bg-neutral-700 p-3 hover:bg-neutral-800 text-neutral-400"
+          onClick={() => onAddProject(true)}
+        >
           + Add Project
         </button>
       </div>
