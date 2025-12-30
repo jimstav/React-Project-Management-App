@@ -2,7 +2,7 @@ import { useState } from 'react';
 import ProjectsSidebar from './components/ProjectsSidebar';
 import NoProjectSelected from './NoProjectSelected';
 import ProjectDetails from './ProjectDetails';
-import NewProject from './NewProject';
+import NewProject from './components/NewProject';
 
 export type Project = {
   title: string;
@@ -103,29 +103,28 @@ function App() {
 
   return (
     <>
-      <main className="h-screen my-8">
+      <main className="h-screen my-8 flex gap-8">
         <ProjectsSidebar
           projects={projectList}
           onAddProject={handleNewProject}
           onSelectProject={handleSelectProject}
         />
-        <div className="p-4 w-[32rem]">
-          {newProject && (
-            <NewProject onSaveProject={addNewProject} onCancel={handleCancel} />
-          )}
-          {selectedProject && !newProject && (
-            <ProjectDetails
-              project={selectedProject}
-              removeProject={removeProject}
-              addTask={addTaskToProject}
-              tasks={tasksList?.[selectedProject.title]}
-              removeTask={removeTaskFromProject}
-            />
-          )}
-          {!selectedProject && !newProject && (
-            <NoProjectSelected onAddProject={handleNewProject} />
-          )}
-        </div>
+
+        {newProject && (
+          <NewProject onSaveProject={addNewProject} onCancel={handleCancel} />
+        )}
+        {selectedProject && !newProject && (
+          <ProjectDetails
+            project={selectedProject}
+            removeProject={removeProject}
+            addTask={addTaskToProject}
+            tasks={tasksList?.[selectedProject.title]}
+            removeTask={removeTaskFromProject}
+          />
+        )}
+        {!selectedProject && !newProject && (
+          <NoProjectSelected onAddProject={handleNewProject} />
+        )}
       </main>
     </>
   );
