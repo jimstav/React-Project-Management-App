@@ -31,6 +31,24 @@ function App() {
     });
   };
 
+  const removeProject = (projectTitle: string) => {
+    setProjectList((prevProjectList) => {
+      const updatedProjectList = prevProjectList.filter(
+        (project) => project.title !== projectTitle
+      );
+      return updatedProjectList;
+    });
+
+    if (tasksList && Object.keys(tasksList).includes(projectTitle)) {
+      setTasksList((prevTaskList) => {
+        delete prevTaskList?.[projectTitle];
+        return prevTaskList;
+      });
+    }
+
+    setSelectedProject(null);
+  };
+
   const handleCancel = () => {
     setNewProject(false);
     setSelectedProject(null);
@@ -100,6 +118,7 @@ function App() {
           {selectedProject && !newProject && (
             <ProjectDetails
               project={selectedProject}
+              removeProject={removeProject}
               addTask={addTaskToProject}
               tasks={tasksList?.[selectedProject.title]}
               removeTask={removeTaskFromProject}

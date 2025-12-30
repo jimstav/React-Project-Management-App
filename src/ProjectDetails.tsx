@@ -3,6 +3,7 @@ import Tasks from './Tasks';
 
 interface ProjectDetailsProps {
   project: Project;
+  removeProject: (projectTitle: string) => void;
   addTask: (projectTitle: string, task: string) => void;
   tasks: string[] | undefined;
   removeTask: (projectTitle: string, task: string) => void;
@@ -10,6 +11,7 @@ interface ProjectDetailsProps {
 
 const ProjectDetails = ({
   project,
+  removeProject,
   addTask,
   tasks,
   removeTask,
@@ -18,7 +20,7 @@ const ProjectDetails = ({
     <div className="p-6 w-full flex flex-col gap-3">
       <div className="flex flex-row justify-between">
         <h1 className="text-2xl font-bold">{project.title}</h1>
-        <button>Delete</button>
+        <button onClick={() => removeProject(project.title)}>Delete</button>
       </div>
       <p className="text-neutral-500">{project.dueDate}</p>
       <p>{project.description}</p>
