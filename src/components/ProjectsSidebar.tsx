@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import type { Project } from './App';
+import type { Project } from '../App';
 
 interface ProjectsProps {
   projects: Project[];
@@ -7,7 +7,7 @@ interface ProjectsProps {
   onSelectProject: (title: string) => void;
 }
 
-const Projects = ({
+const ProjectsSidebar = ({
   projects,
   onAddProject,
   onSelectProject,
@@ -20,7 +20,7 @@ const Projects = ({
   };
 
   return (
-    <>
+    <aside className="p-4 bg-black text-white rounded-tr-xl w-60 mt-6">
       <h2 className="uppercase font-bold">Your Projects</h2>
       <div className="p-2">
         <button
@@ -47,8 +47,8 @@ const Projects = ({
           </li>
         ))}
       </ul>
-    </>
+    </aside>
   );
 };
 
-export default Projects;
+export default ProjectsSidebar;

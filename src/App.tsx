@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import Projects from './Projects';
+import ProjectsSidebar from './components/ProjectsSidebar';
 import NoProjectSelected from './NoProjectSelected';
 import ProjectDetails from './ProjectDetails';
 import NewProject from './NewProject';
@@ -103,15 +103,13 @@ function App() {
 
   return (
     <>
-      <div className="grid grid-flow-col auto-cols-max w-full h-screen">
-        <aside className="p-4 bg-black text-white rounded-tr-xl w-60 mt-6">
-          <Projects
-            projects={projectList}
-            onAddProject={handleNewProject}
-            onSelectProject={handleSelectProject}
-          />
-        </aside>
-        <main className="p-4 w-[32rem]">
+      <main className="grid grid-flow-col auto-cols-max w-full h-screen">
+        <ProjectsSidebar
+          projects={projectList}
+          onAddProject={handleNewProject}
+          onSelectProject={handleSelectProject}
+        />
+        <div className="p-4 w-[32rem]">
           {newProject && (
             <NewProject onSaveProject={addNewProject} onCancel={handleCancel} />
           )}
@@ -127,8 +125,8 @@ function App() {
           {!selectedProject && !newProject && (
             <NoProjectSelected onAddProject={handleNewProject} />
           )}
-        </main>
-      </div>
+        </div>
+      </main>
     </>
   );
 }
