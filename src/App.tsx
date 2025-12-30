@@ -103,7 +103,7 @@ function App() {
 
   return (
     <>
-      <main className="grid grid-flow-col auto-cols-max w-full h-screen">
+      <main className="h-screen my-8">
         <ProjectsSidebar
           projects={projectList}
           onAddProject={handleNewProject}
