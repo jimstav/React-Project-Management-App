@@ -10,10 +10,15 @@ export type Project = {
   dueDate: string;
 };
 
+export type Tasks = {
+  [projectTitle: string]: string[];
+};
+
 function App() {
   const [newProject, setNewProject] = useState(false);
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
   const [projectList, setProjectList] = useState<Project[]>([]);
+  const [tasksList, setTasksList] = useState<Tasks | null>(null);
 
   const handleNewProject = (add: boolean) => {
     setNewProject(add);
@@ -40,6 +45,25 @@ function App() {
     setSelectedProject(projectToSelect);
   };
 
+  const addTaskToProject = (projectTitle: string, task: string) => {
+    if (tasksList && Object.keys(tasksList).includes(projectTitle)) {
+      setTasksList((prevTaskList) => {
+        const prevTasks = prevTaskList?.[projectTitle];
+        return {
+          ...prevTaskList,
+          [projectTitle]: [...prevTasks!, task],
+        };
+      });
+    } else {
+      setTasksList((prevTaskList) => {
+        return {
+          ...prevTaskList,
+          [projectTitle]: [task],
+        };
+      });
+    }
+  };
+
   return (
     <>
       <div className="grid grid-flow-col auto-cols-max w-full h-screen">
@@ -55,7 +79,11 @@ function App() {
             <NewProject onSaveProject={addNewProject} onCancel={handleCancel} />
           )}
           {selectedProject && !newProject && (
-            <ProjectDetails project={selectedProject} />
+            <ProjectDetails
+              project={selectedProject}
+              addTask={addTaskToProject}
+              tasks={tasksList?.[selectedProject.title]}
+            />
           )}
           {!selectedProject && !newProject && (
             <NoProjectSelected onAddProject={handleNewProject} />
