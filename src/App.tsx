@@ -64,6 +64,25 @@ function App() {
     }
   };
 
+  const removeTaskFromProject = (projectTitle: string, task: string) => {
+    if (!tasksList || !Object.keys(tasksList).includes(projectTitle)) return;
+
+    setTasksList((prevTaskList) => {
+      const updatedTasks = prevTaskList?.[projectTitle]?.filter(
+        (t) => t !== task
+      );
+      if (updatedTasks) {
+        return {
+          ...prevTaskList,
+          [projectTitle]: [...updatedTasks],
+        };
+      } else {
+        delete prevTaskList?.[projectTitle];
+        return prevTaskList;
+      }
+    });
+  };
+
   return (
     <>
       <div className="grid grid-flow-col auto-cols-max w-full h-screen">
@@ -83,6 +102,7 @@ function App() {
               project={selectedProject}
               addTask={addTaskToProject}
               tasks={tasksList?.[selectedProject.title]}
+              removeTask={removeTaskFromProject}
             />
           )}
           {!selectedProject && !newProject && (

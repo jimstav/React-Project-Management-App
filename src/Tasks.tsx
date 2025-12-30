@@ -4,15 +4,20 @@ interface TasksProps {
   projectTitle: string;
   addTask: (projectTitle: string, task: string) => void;
   tasks: string[] | undefined;
+  removeTask: (projectTitle: string, task: string) => void;
 }
 
-const Tasks = ({ projectTitle, addTask, tasks }: TasksProps) => {
+const Tasks = ({ projectTitle, addTask, tasks, removeTask }: TasksProps) => {
   const taskRef = useRef<HTMLInputElement | null>(null);
 
   const handleAdd = (projectTitle: string, task: string | undefined) => {
     if (!task) return;
     addTask(projectTitle, task);
     taskRef.current!.value = '';
+  };
+
+  const handleRemove = (taskToRemove: string) => {
+    removeTask(projectTitle, taskToRemove);
   };
 
   return (
@@ -29,7 +34,7 @@ const Tasks = ({ projectTitle, addTask, tasks }: TasksProps) => {
           {tasks.map((task) => (
             <div className="flex justify-between p-2">
               <p>{task}</p>
-              <button>Clear</button>
+              <button onClick={() => handleRemove(task)}>Clear</button>
             </div>
           ))}
         </div>
