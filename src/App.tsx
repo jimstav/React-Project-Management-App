@@ -50,7 +50,7 @@ function App() {
             onSelectProject={handleSelectProject}
           />
         </aside>
-        <main className="p-4 w-full">
+        <main className="p-4 w-[32rem]">
           {newProject && (
             <NewProject onSaveProject={addNewProject} onCancel={handleCancel} />
           )}
