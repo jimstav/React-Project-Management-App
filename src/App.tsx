@@ -20,6 +20,7 @@ function App() {
   };
 
   const addNewProject = (project: Project) => {
+    if (projectList.find((p) => p.title === project.title)) return;
     setProjectList((prevProjectList) => {
       return [...prevProjectList, project];
     });
@@ -30,11 +31,24 @@ function App() {
     setSelectedProject(null);
   };
 
+  const handleSelectProject = (title: string) => {
+    const projectToSelect = projectList.find(
+      (project) => project.title === title
+    );
+    if (!projectToSelect) return;
+    setNewProject(false);
+    setSelectedProject(projectToSelect);
+  };
+
   return (
     <>
       <div className="grid grid-flow-col auto-cols-max w-full h-screen">
         <aside className="p-4 bg-black text-white rounded-tr-xl w-60 mt-6">
-          <Projects projects={projectList} onAddProject={handleNewProject} />
+          <Projects
+            projects={projectList}
+            onAddProject={handleNewProject}
+            onSelectProject={handleSelectProject}
+          />
         </aside>
         <main className="p-4 w-full">
           {newProject && (
