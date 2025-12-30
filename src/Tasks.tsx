@@ -1,4 +1,4 @@
-import { useRef } from 'react';
+import { useRef, useEffect } from 'react';
 
 interface TasksProps {
   projectTitle: string;
@@ -9,6 +9,12 @@ interface TasksProps {
 
 const Tasks = ({ projectTitle, addTask, tasks, removeTask }: TasksProps) => {
   const taskRef = useRef<HTMLInputElement | null>(null);
+
+  useEffect(() => {
+    if (taskRef.current) {
+      taskRef.current.value = '';
+    }
+  }, [projectTitle]);
 
   const handleAdd = (projectTitle: string, task: string | undefined) => {
     if (!task) return;
