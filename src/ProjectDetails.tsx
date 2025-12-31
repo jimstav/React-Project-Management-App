@@ -1,8 +1,8 @@
-import type { Project } from './App';
+import type { ProjectData } from './App';
 import Tasks from './Tasks';
 
 interface ProjectDetailsProps {
-  project: Project;
+  project: ProjectData;
   removeProject: (projectTitle: string) => void;
   addTask: (projectTitle: string, task: string) => void;
   tasks: string[] | undefined;

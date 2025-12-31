@@ -4,12 +4,13 @@ import Button from './Button';
 
 interface ProjectsProps {
   onStartAddProject: () => void;
-  // projects: Project[];
+  projects: Project[];
   // onSelectProject: (title: string) => void;
 }
 
 const ProjectsSidebar = ({
   onStartAddProject,
+  projects,
 }: // projects,
 // onSelectProject,
 ProjectsProps) => {
@@ -28,23 +29,18 @@ ProjectsProps) => {
       <div>
         <Button onClick={onStartAddProject}>+ Add Project</Button>
       </div>
-      {/* <ul className="p-2">
+      <ul className="mt-8">
         {projects.map((project) => (
-          <li
-            className={`hover:bg-neutral-800 ${
-              project.title === selectedProjectTitle ? 'bg-neutral-900' : ''
-            }`}
-            key={project.title}
-          >
+          <li key={project.id}>
             <button
-              className="w-full flex flex-row justify-start"
-              onClick={() => handleSelectProject(project.title)}
+              className="w-full text-left px-2 py-1 rounded-sm my-1 text-stone-400 hover:text-stone-200 hover:bg-stone-800"
+              // onClick={() => handleSelectProject(project.title)}
             >
               {project.title}
             </button>
           </li>
         ))}
-      </ul> */}
+      </ul>
     </aside>
   );
 };

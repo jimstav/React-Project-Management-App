@@ -4,11 +4,13 @@ import NoProjectSelected from './components/NoProjectSelected';
 import ProjectDetails from './ProjectDetails';
 import NewProject from './components/NewProject';
 
-export type Project = {
+export type ProjectData = {
   title: string;
   description: string;
   dueDate: string;
 };
+
+export type Project = ProjectData & { id: number };
 
 export type Tasks = {
   [projectTitle: string]: string[];
@@ -34,30 +36,34 @@ function App() {
     });
   };
 
-  const handleAddProject = (projectData: Project) => {
+  const handleAddProject = (projectData: ProjectData) => {
     setProjectsState((prevState) => {
+      const projectId = Math.random();
       const newProject = {
         ...projectData,
-        id: Math.random(),
+        id: projectId,
       };
 
       return {
         ...prevState,
+        selectedProjectId: undefined,
         projects: [...prevState.projects, newProject],
       };
     });
   };
 
   const [newProject, setNewProject] = useState(false);
-  const [selectedProject, setSelectedProject] = useState<Project | null>(null);
-  const [projectList, setProjectList] = useState<Project[]>([]);
+  const [selectedProject, setSelectedProject] = useState<ProjectData | null>(
+    null
+  );
+  const [projectList, setProjectList] = useState<ProjectData[]>([]);
   const [tasksList, setTasksList] = useState<Tasks | null>(null);
 
   const handleNewProject = (add: boolean) => {
     setNewProject(add);
   };
 
-  const addNewProject = (project: Project) => {
+  const addNewProject = (project: ProjectData) => {
     if (projectList.find((p) => p.title === project.title)) return;
     setProjectList((prevProjectList) => {
       return [...prevProjectList, project];
@@ -145,7 +151,10 @@ function App() {
   return (
     <>
       <main className="h-screen my-8 flex gap-8">
-        <ProjectsSidebar onStartAddProject={handleStartAddProject} />
+        <ProjectsSidebar
+          onStartAddProject={handleStartAddProject}
+          projects={projectsState.projects}
+        />
         {content}
 
         {/* {newProject && (

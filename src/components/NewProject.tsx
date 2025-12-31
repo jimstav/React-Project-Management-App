@@ -1,9 +1,9 @@
 import { useRef } from 'react';
-import type { Project } from '../App';
+import type { ProjectData } from '../App';
 import Input from './Input';
 
 interface NewProjectProps {
-  onAdd: (project: Project) => void;
+  onAdd: (project: ProjectData) => void;
   onCancel: () => void;
 }
 
@@ -23,7 +23,7 @@ const NewProject = ({ onAdd, onCancel }: NewProjectProps) => {
     )
       return;
 
-    const enteredData: Project = {
+    const enteredData: ProjectData = {
       title: title.current.value,
       description: description.current.value,
       dueDate: dueDate.current.value,
