@@ -3,22 +3,22 @@ import type { Project } from '../App';
 import Button from './Button';
 
 interface ProjectsProps {
-  projects: Project[];
-  onAddProject: (add: boolean) => void;
-  onSelectProject: (title: string) => void;
+  onStartAddProject: () => void;
+  // projects: Project[];
+  // onSelectProject: (title: string) => void;
 }
 
 const ProjectsSidebar = ({
-  projects,
-  onAddProject,
-  onSelectProject,
-}: ProjectsProps) => {
-  const [selectedProjectTitle, setSelectedProjectTitle] = useState('');
+  onStartAddProject,
+}: // projects,
+// onSelectProject,
+ProjectsProps) => {
+  // const [selectedProjectTitle, setSelectedProjectTitle] = useState('');
 
-  const handleSelectProject = (title: string) => {
-    onSelectProject(title);
-    setSelectedProjectTitle(title);
-  };
+  // const handleSelectProject = (title: string) => {
+  //   onSelectProject(title);
+  //   setSelectedProjectTitle(title);
+  // };
 
   return (
     <aside className="w-1/3 px-8 py-16 bg-stone-900 text-stone-50 md:w-72 rounded-r-xl">
@@ -26,9 +26,9 @@ const ProjectsSidebar = ({
         Your Projects
       </h2>
       <div>
-        <Button onClick={() => onAddProject(true)}>+ Add Project</Button>
+        <Button onClick={onStartAddProject}>+ Add Project</Button>
       </div>
-      <ul className="p-2">
+      {/* <ul className="p-2">
         {projects.map((project) => (
           <li
             className={`hover:bg-neutral-800 ${
@@ -44,7 +44,7 @@ const ProjectsSidebar = ({
             </button>
           </li>
         ))}
-      </ul>
+      </ul> */}
     </aside>
   );
 };

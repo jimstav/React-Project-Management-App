@@ -14,7 +14,26 @@ export type Tasks = {
   [projectTitle: string]: string[];
 };
 
+type ProjectsState = {
+  selectedProjectId: string | null | undefined;
+  projects: Project[];
+};
+
 function App() {
+  const [projectsState, setProjectsState] = useState<ProjectsState>({
+    selectedProjectId: undefined,
+    projects: [],
+  });
+
+  const handleStartAddProject = () => {
+    setProjectsState((prevState) => {
+      return {
+        ...prevState,
+        selectedProjectId: null,
+      };
+    });
+  };
+
   const [newProject, setNewProject] = useState(false);
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
   const [projectList, setProjectList] = useState<Project[]>([]);
@@ -101,16 +120,23 @@ function App() {
     });
   };
 
+  let content;
+
+  if (projectsState.selectedProjectId === null) {
+    content = (
+      <NewProject onSaveProject={addNewProject} onCancel={handleCancel} />
+    );
+  } else if (projectsState.selectedProjectId === undefined) {
+    content = <NoProjectSelected onStartAddProject={handleStartAddProject} />;
+  }
+
   return (
     <>
       <main className="h-screen my-8 flex gap-8">
-        <ProjectsSidebar
-          projects={projectList}
-          onAddProject={handleNewProject}
-          onSelectProject={handleSelectProject}
-        />
+        <ProjectsSidebar onStartAddProject={handleStartAddProject} />
+        {content}
 
-        {newProject && (
+        {/* {newProject && (
           <NewProject onSaveProject={addNewProject} onCancel={handleCancel} />
         )}
         {selectedProject && !newProject && (
@@ -121,10 +147,7 @@ function App() {
             tasks={tasksList?.[selectedProject.title]}
             removeTask={removeTaskFromProject}
           />
-        )}
-        {!selectedProject && !newProject && (
-          <NoProjectSelected onAddProject={handleNewProject} />
-        )}
+        )} */}
       </main>
     </>
   );

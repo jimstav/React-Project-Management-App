@@ -2,10 +2,10 @@ import noProjectImage from '../assets/no-projects.png';
 import Button from './Button';
 
 interface NoProjectSelectedProps {
-  onAddProject: (add: boolean) => void;
+  onStartAddProject: () => void;
 }
 
-const NoProjectSelected = ({ onAddProject }: NoProjectSelectedProps) => {
+const NoProjectSelected = ({ onStartAddProject }: NoProjectSelectedProps) => {
   return (
     <div className="mt-24 text-center w-2/3">
       <img
@@ -20,7 +20,7 @@ const NoProjectSelected = ({ onAddProject }: NoProjectSelectedProps) => {
         Select a project or get started with a new one
       </p>
       <p className="mt-8">
-        <Button onClick={() => onAddProject(true)}>Create new project</Button>
+        <Button onClick={onStartAddProject}>Create new project</Button>
       </p>
     </div>
   );
