@@ -3,11 +3,11 @@ import type { Project } from '../App';
 import Input from './Input';
 
 interface NewProjectProps {
-  onSaveProject: (project: Project) => void;
+  onAdd: (project: Project) => void;
   onCancel: () => void;
 }
 
-const NewProject = ({ onSaveProject, onCancel }: NewProjectProps) => {
+const NewProject = ({ onAdd, onCancel }: NewProjectProps) => {
   const title = useRef<HTMLInputElement | null>(null);
   const description = useRef<HTMLTextAreaElement | null>(null);
   const dueDate = useRef<HTMLInputElement | null>(null);
@@ -23,13 +23,13 @@ const NewProject = ({ onSaveProject, onCancel }: NewProjectProps) => {
     )
       return;
 
-    const project: Project = {
+    const enteredData: Project = {
       title: title.current.value,
       description: description.current.value,
       dueDate: dueDate.current.value,
     };
 
-    onSaveProject(project);
+    onAdd(enteredData);
     clearForm();
   };
 
@@ -69,9 +69,9 @@ const NewProject = ({ onSaveProject, onCancel }: NewProjectProps) => {
         </button>
       </menu>
       <div>
-        <Input label="Title" />
-        <Input label="Description" textarea />
-        <Input label="Due Date" />
+        <Input type="text" ref={title} label="Title" />
+        <Input ref={description} label="Description" textarea />
+        <Input type="date" ref={dueDate} label="Due Date" />
         {/* <p className="flex flex-col gap-1">
           <label htmlFor="title" className="text-neutral-700 uppercase text-sm">
             Title

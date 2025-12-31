@@ -34,6 +34,20 @@ function App() {
     });
   };
 
+  const handleAddProject = (projectData: Project) => {
+    setProjectsState((prevState) => {
+      const newProject = {
+        ...projectData,
+        id: Math.random(),
+      };
+
+      return {
+        ...prevState,
+        projects: [...prevState.projects, newProject],
+      };
+    });
+  };
+
   const [newProject, setNewProject] = useState(false);
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
   const [projectList, setProjectList] = useState<Project[]>([]);
@@ -123,9 +137,7 @@ function App() {
   let content;
 
   if (projectsState.selectedProjectId === null) {
-    content = (
-      <NewProject onSaveProject={addNewProject} onCancel={handleCancel} />
-    );
+    content = <NewProject onAdd={handleAddProject} onCancel={handleCancel} />;
   } else if (projectsState.selectedProjectId === undefined) {
     content = <NoProjectSelected onStartAddProject={handleStartAddProject} />;
   }
