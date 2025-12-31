@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import ProjectsSidebar from './components/ProjectsSidebar';
-import NoProjectSelected from './NoProjectSelected';
+import NoProjectSelected from './components/NoProjectSelected';
 import ProjectDetails from './ProjectDetails';
 import NewProject from './components/NewProject';
 

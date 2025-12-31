@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import type { Project } from '../App';
+import Button from './Button';
 
 interface ProjectsProps {
   projects: Project[];
@@ -25,12 +26,7 @@ const ProjectsSidebar = ({
         Your Projects
       </h2>
       <div>
-        <button
-          className="px-4 py-2 text-xs md:text-base rounded-md bg-stone-700 text-stone-400 hover:bg-stone-600 hover:text-stone-100"
-          onClick={() => onAddProject(true)}
-        >
-          + Add Project
-        </button>
+        <Button onClick={() => onAddProject(true)}>+ Add Project</Button>
       </div>
       <ul className="p-2">
         {projects.map((project) => (
