@@ -32,40 +32,44 @@ const NewProject = ({ onAdd, onCancel }: NewProjectProps) => {
     }
 
     onAdd(enteredData);
-    clearForm();
+    // clearForm();
   };
 
-  const handleCancel = () => {
-    clearForm();
-    onCancel();
-  };
+  // const handleCancel = () => {
+  //   clearForm();
+  //   onCancel();
+  // };
 
-  const clearForm = () => {
-    if (title.current) {
-      title.current.value = '';
-    }
+  // const clearForm = () => {
+  //   if (title.current) {
+  //     title.current.value = '';
+  //   }
 
-    if (description.current) {
-      description.current.value = '';
-    }
+  //   if (description.current) {
+  //     description.current.value = '';
+  //   }
 
-    if (dueDate.current) {
-      dueDate.current.value = '';
-    }
-  };
+  //   if (dueDate.current) {
+  //     dueDate.current.value = '';
+  //   }
+  // };
 
   return (
     <>
       <Modal ref={modal} buttonCaption="Okay">
-        <h2>Invalid Input</h2>
-        <p>Oops.. Looks like you forgot to enter a value.</p>
-        <p>Please make sure you provide a valid value for every input field.</p>
+        <h2 className="text-xl font-bold text-stone-700 my-4">Invalid Input</h2>
+        <p className="text-stone-600 mb-4">
+          Oops.. Looks like you forgot to enter a value.
+        </p>
+        <p className="text-stone-600 mb-4">
+          Please make sure you provide a valid value for every input field.
+        </p>
       </Modal>
       <div className="w-[35rem] mt-16">
         <menu className="flex items-center justify-end gap-4 my-4">
           <button
             className="text-stone-800 hover:text-stone-950"
-            onClick={handleCancel}
+            onClick={onCancel}
           >
             Cancel
           </button>
