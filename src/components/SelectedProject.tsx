@@ -1,5 +1,5 @@
 import type { Project } from '../App';
-import Tasks from '../Tasks';
+import Tasks from './Tasks';
 
 interface SelectedProjectProps {
   project: Project;
@@ -41,13 +41,12 @@ SelectedProjectProps) => {
           {project.description}
         </p>
       </header>
-      {/* <hr className="border-solid border-2" />
       <Tasks
         projectTitle={project.title}
-        addTask={addTask}
-        tasks={tasks}
-        removeTask={removeTask}
-      /> */}
+        // addTask={addTask}
+        // tasks={tasks}
+        // removeTask={removeTask}
+      />
     </div>
   );
 };
