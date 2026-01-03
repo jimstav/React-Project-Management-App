@@ -5,7 +5,7 @@ import type { Task } from '../App';
 interface TasksProps {
   projectTitle: string;
   onAdd: (text: string) => void;
-  onDelete: () => void;
+  onDelete: (id: number) => void;
   tasks: Task[];
 }
 
@@ -44,7 +44,7 @@ const Tasks = ({ projectTitle, onAdd, onDelete, tasks }: TasksProps) => {
               <span>{task.text}</span>
               <button
                 className="text-stone-700 hover:text-red-500"
-                // onClick={() => onDelete(task)}
+                onClick={() => onDelete(task.id)}
               >
                 Clear
               </button>

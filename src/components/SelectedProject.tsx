@@ -5,7 +5,7 @@ interface SelectedProjectProps {
   project: Project;
   onDelete: () => void;
   onAddTask: (text: string) => void;
-  onDeleteTask: () => void;
+  onDeleteTask: (id: number) => void;
   tasks: Task[];
 }
 

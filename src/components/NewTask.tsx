@@ -12,6 +12,7 @@ const NewTask = ({ onAdd }: NewTaskProps) => {
   };
 
   const handleClick = () => {
+    if (enteredTask.trim() === '') return;
     onAdd(enteredTask);
     setEnteredTask('');
   };
