@@ -70,6 +70,18 @@ function App() {
     });
   };
 
+  const handleDeleteProject = () => {
+    setProjectsState((prevState) => {
+      return {
+        ...prevState,
+        selectedProjectId: undefined,
+        projects: prevState.projects.filter(
+          (project) => project.id !== prevState.selectedProjectId
+        ),
+      };
+    });
+  };
+
   // const [newProject, setNewProject] = useState(false);
   // const [selectedProject, setSelectedProject] = useState<ProjectData | null>(
   //   null
@@ -162,7 +174,7 @@ function App() {
     (project) => project.id === projectsState.selectedProjectId
   );
   let content = selectedProject ? (
-    <SelectedProject project={selectedProject} />
+    <SelectedProject project={selectedProject} onDelete={handleDeleteProject} />
   ) : (
     ''
   );

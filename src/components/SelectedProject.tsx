@@ -3,7 +3,7 @@ import Tasks from '../Tasks';
 
 interface SelectedProjectProps {
   project: Project;
-  // removeProject: (projectTitle: string) => void;
+  onDelete: () => void;
   // addTask: (projectTitle: string, task: string) => void;
   // tasks: string[] | undefined;
   // removeTask: (projectTitle: string, task: string) => void;
@@ -11,8 +11,8 @@ interface SelectedProjectProps {
 
 const SelectedProject = ({
   project,
-}: // removeProject,
-// addTask,
+  onDelete,
+}: // addTask,
 // tasks,
 // removeTask,
 SelectedProjectProps) => {
@@ -31,7 +31,7 @@ SelectedProjectProps) => {
           </h1>
           <button
             className="text-stone-600 hover:text-stone-950"
-            // onClick={() => removeProject(project.title)}
+            onClick={onDelete}
           >
             Delete
           </button>
