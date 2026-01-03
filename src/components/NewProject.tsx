@@ -32,27 +32,7 @@ const NewProject = ({ onAdd, onCancel }: NewProjectProps) => {
     }
 
     onAdd(enteredData);
-    // clearForm();
   };
-
-  // const handleCancel = () => {
-  //   clearForm();
-  //   onCancel();
-  // };
-
-  // const clearForm = () => {
-  //   if (title.current) {
-  //     title.current.value = '';
-  //   }
-
-  //   if (description.current) {
-  //     description.current.value = '';
-  //   }
-
-  //   if (dueDate.current) {
-  //     dueDate.current.value = '';
-  //   }
-  // };
 
   return (
     <>
@@ -84,44 +64,6 @@ const NewProject = ({ onAdd, onCancel }: NewProjectProps) => {
           <Input type="text" ref={title} label="Title" />
           <Input ref={description} label="Description" textarea />
           <Input type="date" ref={dueDate} label="Due Date" />
-          {/* <p className="flex flex-col gap-1">
-          <label htmlFor="title" className="text-neutral-700 uppercase text-sm">
-            Title
-          </label>
-          <input
-            type="text"
-            id="title"
-            ref={title}
-            className="bg-neutral-300 p-1"
-          />
-        </p>
-        <p className="flex flex-col gap-1">
-          <label
-            htmlFor="description"
-            className="text-neutral-700 uppercase text-sm"
-          >
-            Description
-          </label>
-          <textarea
-            id="description"
-            ref={description}
-            className="bg-neutral-300 p-1"
-          />
-        </p>
-        <p className="flex flex-col gap-1">
-          <label
-            htmlFor="dueDate"
-            className="text-neutral-700 uppercase text-sm"
-          >
-            Due Date
-          </label>
-          <input
-            type="date"
-            id="dueDate"
-            ref={dueDate}
-            className="bg-neutral-300 p-1"
-          />
-        </p> */}
         </div>
       </div>
     </>
