@@ -12,6 +12,12 @@ export type ProjectData = {
 
 export type Project = ProjectData & { id: number };
 
+export type Task = {
+  id: number;
+  text: string;
+  projectId: number;
+};
+
 export type Tasks = {
   [projectTitle: string]: string[];
 };
@@ -19,12 +25,14 @@ export type Tasks = {
 type ProjectsState = {
   selectedProjectId: number | null | undefined;
   projects: Project[];
+  tasks: Task[];
 };
 
 function App() {
   const [projectsState, setProjectsState] = useState<ProjectsState>({
     selectedProjectId: undefined,
     projects: [],
+    tasks: [],
   });
 
   const handleStartAddProject = () => {
@@ -81,6 +89,26 @@ function App() {
       };
     });
   };
+
+  function handleAddTask(text: string) {
+    setProjectsState((prevState) => {
+      if (!prevState.selectedProjectId) return prevState;
+
+      const taskId = Math.random();
+      const newTask: Task = {
+        text: text,
+        projectId: prevState.selectedProjectId,
+        id: taskId,
+      };
+
+      return {
+        ...prevState,
+        tasks: [newTask, ...prevState.tasks],
+      };
+    });
+  }
+
+  function handleDeleteTask() {}
 
   // const [newProject, setNewProject] = useState(false);
   // const [selectedProject, setSelectedProject] = useState<ProjectData | null>(
@@ -173,8 +201,19 @@ function App() {
   const selectedProject = projectsState.projects.find(
     (project) => project.id === projectsState.selectedProjectId
   );
+
+  const selectedProjectTasks = projectsState.tasks.filter(
+    (task) => task.projectId === selectedProject?.id
+  );
+
   let content = selectedProject ? (
-    <SelectedProject project={selectedProject} onDelete={handleDeleteProject} />
+    <SelectedProject
+      project={selectedProject}
+      onDelete={handleDeleteProject}
+      onAddTask={handleAddTask}
+      onDeleteTask={handleDeleteTask}
+      tasks={selectedProjectTasks}
+    />
   ) : (
     ''
   );

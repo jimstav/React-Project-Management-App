@@ -1,14 +1,15 @@
 import { useRef, useEffect } from 'react';
 import NewTask from './NewTask';
+import type { Task } from '../App';
 
 interface TasksProps {
   projectTitle: string;
-  // addTask: (projectTitle: string, task: string) => void;
-  // tasks: string[] | undefined;
-  // removeTask: (projectTitle: string, task: string) => void;
+  onAdd: (text: string) => void;
+  onDelete: () => void;
+  tasks: Task[];
 }
 
-const Tasks = ({ projectTitle }: TasksProps) => {
+const Tasks = ({ projectTitle, onAdd, onDelete, tasks }: TasksProps) => {
   const taskRef = useRef<HTMLInputElement | null>(null);
 
   // useEffect(() => {
@@ -30,21 +31,27 @@ const Tasks = ({ projectTitle }: TasksProps) => {
   return (
     <section>
       <h2 className="text-2xl font-bold text-stone-700 mb-4">Tasks</h2>
-      <NewTask />
-      {/* {tasks ? (
-        <ul>
+      <NewTask onAdd={onAdd} />
+      {tasks.length === 0 && (
+        <p className="text-stone-800 my-4">
+          This project does not have any tasks yet.
+        </p>
+      )}
+      {tasks.length > 0 && (
+        <ul className="p-4 mt-8 rounded-md bg-stone-100">
           {tasks.map((task) => (
-            <li>
-              <p>{task}</p>
-              <button onClick={() => handleRemove(task)}>Clear</button>
+            <li key={task.id} className="flex justify-between my-4">
+              <span>{task.text}</span>
+              <button
+                className="text-stone-700 hover:text-red-500"
+                // onClick={() => onDelete(task)}
+              >
+                Clear
+              </button>
             </li>
           ))}
         </ul>
-      ) : ( */}
-      <p className="text-stone-800 my-4">
-        This project does not have any tasks yet.
-      </p>
-      {/* )} */}
+      )}
     </section>
   );
 };
